@@ -1,5 +1,6 @@
 package com.example.gym_app.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,6 @@ public class Workout {
     @Column(unique = true)
     private String name;
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Exercise> exercises = new ArrayList<>();
 }

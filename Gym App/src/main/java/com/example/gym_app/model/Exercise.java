@@ -1,5 +1,6 @@
 package com.example.gym_app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private String imageUrl;
     @ElementCollection
     @JoinTable(name = "excecise_sets", joinColumns = @JoinColumn(name = "exercise_id"))
@@ -30,6 +32,7 @@ public class Exercise {
     private List<String> instructions = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "workout_id", nullable = false)
+    @JsonBackReference
     private Workout workout;
 
 }

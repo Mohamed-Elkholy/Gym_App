@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,15 @@ public class WorkoutService {
         repository.deleteById(id);
     }
 
-    public Workout getWorkout(Long id) {
-        return repository.getById(id);
+    public Optional<Workout> getWorkout(Long id) {
+        return repository.findById(id);
+    }
+
+    public List<Workout> addWorkouts(List<Workout> workouts) {
+        return repository.saveAll(workouts);
+    }
+
+    public Optional<Workout> getWorkoutByName(String name) {
+        return repository.findByName(name);
     }
 }

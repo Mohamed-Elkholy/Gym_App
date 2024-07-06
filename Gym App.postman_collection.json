@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "e6576e75-bdc3-4292-b89c-8e571e7183a2",
+		"name": "Gym App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28653324"
+	},
+	"item": [
+		{
+			"name": "Workout",
+			"item": [
+				{
+					"name": "workout list",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "workout",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "add workout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete workout",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add workouts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WorkoutByName",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exercise",
+			"item": [
+				{
+					"name": "Exercise list",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Exercise",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "ExerciseByName",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "add Exercise",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Exercises",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Exercise",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/exercise/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"exercise",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Account",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Water Tracker",
+			"item": [
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/water_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"water_tracker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/water_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"water_tracker"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sleep Tracker",
+			"item": [
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/water_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"water_tracker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/water_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"water_tracker"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
