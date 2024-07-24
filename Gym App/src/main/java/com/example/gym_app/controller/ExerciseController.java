@@ -1,12 +1,9 @@
 package com.example.gym_app.controller;
 
 import com.example.gym_app.model.Exercise;
-import com.example.gym_app.model.Workout;
 import com.example.gym_app.service.ExerciseService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
