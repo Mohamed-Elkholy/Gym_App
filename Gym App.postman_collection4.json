@@ -1,0 +1,518 @@
+{
+	"info": {
+		"_postman_id": "e6576e75-bdc3-4292-b89c-8e571e7183a2",
+		"name": "Gym App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28653324"
+	},
+	"item": [
+		{
+			"name": "Workout",
+			"item": [
+				{
+					"name": "workout list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "workout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add workout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Sholder Workout\",\r\n    \"exercises\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/workout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete workout",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/workout/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add workouts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\": \"Chest Workout\",\r\n        \"exercises\": [\r\n            {\r\n                \"name\": \"Bench Press\",\r\n                \"imageUrl\": \"http://example.com/bench_press.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"The bench press is a basic compound exercise that targets the chest muscles, shoulders, and triceps.\"],\r\n                \"instructions\": [\r\n                    \"Lie back on a flat bench holding a barbell in the rack above you with a shoulder-width, overhand grip.\",\r\n                    \"Lift the bar off the rack and position it above your chest with arms fully extended.\",\r\n                    \"Lower the bar slowly until it touches your middle chest.\",\r\n                    \"Push the bar back to the starting position explosively as you exhale.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Incline Bench Press\",\r\n                \"imageUrl\": \"http://example.com/incline_bench_press.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"The incline bench press targets the upper part of the chest and the front shoulders.\"],\r\n                \"instructions\": [\r\n                    \"Set an adjustable bench to an incline of 30-45 degrees.\",\r\n                    \"Lie back on the bench holding a barbell above your chest with arms fully extended.\",\r\n                    \"Lower the bar slowly until it touches the upper part of your chest.\",\r\n                    \"Push the bar back to the starting position as you exhale.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Dumbbell Flyes\",\r\n                \"imageUrl\": \"http://example.com/dumbbell_flyes.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Dumbbell flyes target the pectoral muscles and are great for stretching and building chest muscles.\"],\r\n                \"instructions\": [\r\n                    \"Lie on a flat bench with a dumbbell in each hand, palms facing each other.\",\r\n                    \"Extend your arms above your chest with a slight bend in your elbows.\",\r\n                    \"Lower the dumbbells out to the sides of your chest in an arc motion.\",\r\n                    \"Raise the dumbbells back to the starting position, squeezing your chest at the top.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Push-Ups\",\r\n                \"imageUrl\": \"http://example.com/push_ups.jpg\",\r\n                \"sets\": [\"3x15\", \"3x12\", \"3x10\"],\r\n                \"description\": [\"Push-ups are a basic bodyweight exercise that targets the chest, shoulders, and triceps.\"],\r\n                \"instructions\": [\r\n                    \"Get into a high plank position with your hands placed shoulder-width apart.\",\r\n                    \"Lower your body until your chest nearly touches the floor, keeping your elbows at a 45-degree angle.\",\r\n                    \"Push back up to the starting position.\",\r\n                    \"Keep your body in a straight line throughout the movement.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Chest Dips\",\r\n                \"imageUrl\": \"http://example.com/chest_dips.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Chest dips target the lower chest and triceps.\"],\r\n                \"instructions\": [\r\n                    \"Hold onto the parallel bars and lift your body with your arms fully extended.\",\r\n                    \"Lean forward slightly and lower your body by bending your elbows until your upper arms are parallel to the floor.\",\r\n                    \"Push your body back to the starting position.\",\r\n                    \"Keep your core engaged and your movements controlled.\"\r\n                ]\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"name\": \"Leg Workout\",\r\n        \"exercises\": [\r\n            {\r\n                \"name\": \"Squats\",\r\n                \"imageUrl\": \"http://example.com/squats.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"Squats are a compound exercise that targets the quadriceps, hamstrings, and glutes.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet shoulder-width apart and your toes pointed slightly outward.\",\r\n                    \"Lower your body by bending your knees and hips, keeping your back straight and your chest up.\",\r\n                    \"Go down until your thighs are parallel to the floor.\",\r\n                    \"Push back up to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Lunges\",\r\n                \"imageUrl\": \"http://example.com/lunges.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Lunges are great for targeting the quadriceps, hamstrings, glutes, and calves.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet together and your hands on your hips.\",\r\n                    \"Step forward with one leg and lower your body until your front thigh is parallel to the floor.\",\r\n                    \"Push back up to the starting position and repeat with the other leg.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Leg Press\",\r\n                \"imageUrl\": \"http://example.com/leg_press.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"The leg press targets the quadriceps, hamstrings, and glutes.\"],\r\n                \"instructions\": [\r\n                    \"Sit on the leg press machine with your feet shoulder-width apart on the platform.\",\r\n                    \"Lower the platform by bending your knees until they form a 90-degree angle.\",\r\n                    \"Push the platform back up to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Calf Raises\",\r\n                \"imageUrl\": \"http://example.com/calf_raises.jpg\",\r\n                \"sets\": [\"3x15\", \"3x12\", \"3x10\"],\r\n                \"description\": [\"Calf raises target the calf muscles and improve ankle strength and stability.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet shoulder-width apart and your toes pointing forward.\",\r\n                    \"Raise your heels off the ground as high as possible.\",\r\n                    \"Lower your heels back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Leg Curls\",\r\n                \"imageUrl\": \"http://example.com/leg_curls.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Leg curls primarily target the hamstrings.\"],\r\n                \"instructions\": [\r\n                    \"Lie face down on the leg curl machine with your legs fully extended.\",\r\n                    \"Curl your legs up by bending your knees until your heels are close to your buttocks.\",\r\n                    \"Lower your legs back to the starting position.\"\r\n                ]\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"name\": \"Back Workout\",\r\n        \"exercises\": [\r\n            {\r\n                \"name\": \"Deadlift\",\r\n                \"imageUrl\": \"http://example.com/deadlift.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"The deadlift is a compound movement that targets the entire back, glutes, and hamstrings.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet hip-width apart and your hands gripping the barbell just outside your legs.\",\r\n                    \"Keep your back straight and lift the bar by extending your hips and knees.\",\r\n                    \"Lower the bar back to the ground with control.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Pull-Up\",\r\n                \"imageUrl\": \"http://example.com/pull_up.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"Pull-ups are a bodyweight exercise that primarily targets the lats and upper back.\"],\r\n                \"instructions\": [\r\n                    \"Hang from a pull-up bar with your palms facing away from you and your hands shoulder-width apart.\",\r\n                    \"Pull yourself up until your chin is above the bar.\",\r\n                    \"Lower yourself back to the starting position with control.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Bent Over Row\",\r\n                \"imageUrl\": \"http://example.com/bent_over_row.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Bent over rows target the middle back and lats.\"],\r\n                \"instructions\": [\r\n                    \"Hold a barbell with an overhand grip, bend your knees slightly and lean forward from the hips.\",\r\n                    \"Pull the bar towards your lower chest, keeping your elbows close to your body.\",\r\n                    \"Lower the bar back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Lat Pulldown\",\r\n                \"imageUrl\": \"http://example.com/lat_pulldown.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Lat pulldowns target the lats and help build a wide back.\"],\r\n                \"instructions\": [\r\n                    \"Sit at a lat pulldown machine with your thighs under the pads.\",\r\n                    \"Grab the bar with an overhand grip wider than shoulder-width.\",\r\n                    \"Pull the bar down to your upper chest, then slowly return to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"T-Bar Row\",\r\n                \"imageUrl\": \"http://example.com/t_bar_row.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"T-bar rows target the middle back and lats.\"],\r\n                \"instructions\": [\r\n                    \"Stand over a T-bar row machine and grab the handles with an overhand grip.\",\r\n                    \"Pull the handles towards your lower chest, squeezing your shoulder blades together.\",\r\n                    \"Lower the handles back to the starting position.\"\r\n                ]\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"name\": \"Shoulder Workout\",\r\n        \"exercises\": [\r\n            {\r\n                \"name\": \"Shoulder Press\",\r\n                \"imageUrl\": \"http://example.com/shoulder_press.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"The shoulder press targets the deltoids and triceps.\"],\r\n                \"instructions\": [\r\n                    \"Sit on a bench with back support and hold a pair of dumbbells at shoulder height.\",\r\n                    \"Press the dumbbells overhead until your arms are fully extended.\",\r\n                    \"Lower the dumbbells back to shoulder height.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Lateral Raise\",\r\n                \"imageUrl\": \"http://example.com/lateral_raise.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Lateral raises target the side deltoids and help build shoulder width.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet shoulder-width apart, holding a pair of dumbbells at your sides.\",\r\n                    \"Raise the dumbbells out to the sides until they are level with your shoulders.\",\r\n                    \"Lower the dumbbells back to your sides.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Front Raise\",\r\n                \"imageUrl\": \"http://example.com/front_raise.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Front raises target the front deltoids.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet shoulder-width apart, holding a pair of dumbbells in front of your thighs.\",\r\n                    \"Raise the dumbbells in front of you to shoulder height.\",\r\n                    \"Lower the dumbbells back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Reverse Fly\",\r\n                \"imageUrl\": \"http://example.com/reverse_fly.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Reverse flyes target the rear deltoids and upper back.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet shoulder-width apart, holding a pair of dumbbells.\",\r\n                    \"Bend forward at the hips, keeping your back straight and your arms hanging down.\",\r\n                    \"Raise the dumbbells out to the sides until they are level with your shoulders.\",\r\n                    \"Lower the dumbbells back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Arnold Press\",\r\n                \"imageUrl\": \"http://example.com/arnold_press.jpg\",\r\n                \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n                \"description\": [\"The Arnold press targets the entire shoulder and involves rotation.\"],\r\n                \"instructions\": [\r\n                    \"Sit on a bench with back support, holding a pair of dumbbells at shoulder height with palms facing you.\",\r\n                    \"Press the dumbbells overhead while rotating your palms to face forward.\",\r\n                    \"Lower the dumbbells back to the starting position.\"\r\n                ]\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"name\": \"Arm Workout\",\r\n        \"exercises\": [\r\n            {\r\n                \"name\": \"Bicep Curl\",\r\n                \"imageUrl\": \"http://example.com/bicep_curl.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Bicep curls target the biceps and help build arm strength.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet shoulder-width apart, holding a pair of dumbbells at your sides.\",\r\n                    \"Curl the dumbbells towards your shoulders, keeping your elbows close to your body.\",\r\n                    \"Lower the dumbbells back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Tricep Extension\",\r\n                \"imageUrl\": \"http://example.com/tricep_extension.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Tricep extensions target the triceps and help build arm strength.\"],\r\n                \"instructions\": [\r\n                    \"Sit on a bench with back support, holding a dumbbell with both hands behind your head.\",\r\n                    \"Extend your arms to lift the dumbbell overhead.\",\r\n                    \"Lower the dumbbell back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Hammer Curl\",\r\n                \"imageUrl\": \"http://example.com/hammer_curl.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Hammer curls target the biceps and forearms.\"],\r\n                \"instructions\": [\r\n                    \"Stand with your feet shoulder-width apart, holding a pair of dumbbells at your sides with palms facing each other.\",\r\n                    \"Curl the dumbbells towards your shoulders, keeping your elbows close to your body.\",\r\n                    \"Lower the dumbbells back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Skull Crusher\",\r\n                \"imageUrl\": \"http://example.com/skull_crusher.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Skull crushers target the triceps and help build arm strength.\"],\r\n                \"instructions\": [\r\n                    \"Lie on a bench holding a barbell with your hands shoulder-width apart.\",\r\n                    \"Lower the barbell to your forehead by bending your elbows.\",\r\n                    \"Extend your arms to lift the barbell back to the starting position.\"\r\n                ]\r\n            },\r\n            {\r\n                \"name\": \"Concentration Curl\",\r\n                \"imageUrl\": \"http://example.com/concentration_curl.jpg\",\r\n                \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n                \"description\": [\"Concentration curls isolate the biceps and help build arm strength.\"],\r\n                \"instructions\": [\r\n                    \"Sit on a bench, leaning forward slightly, and hold a dumbbell with one hand.\",\r\n                    \"Rest your elbow on the inside of your thigh.\",\r\n                    \"Curl the dumbbell towards your shoulder.\",\r\n                    \"Lower the dumbbell back to the starting position.\"\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/workout/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WorkoutByName",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/workout/get/Chest Workout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"workout",
+								"get",
+								"Chest Workout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exercise",
+			"item": [
+				{
+					"name": "Exercise list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/exercise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"exercise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exercise",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/exercise/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"exercise",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ExerciseByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/exercise/get/Push-Ups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"exercise",
+								"get",
+								"Push-Ups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Exercise",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageUrl\": \"http://example.com/exercise1.jpg\",\r\n    \"sets\": [\"3x10\", \"3x12\"],\r\n    \"description\": [\"Bench Press\", \"Incline Press\"],\r\n    \"instructions\": [\"Keep your back straight\", \"Don't lock your elbows\"],\r\n    \"workout\": {\r\n        \"id\": 2\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/exercise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"exercise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Exercises",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\": \"Bench Press\",\r\n        \"imageUrl\": \"http://example.com/bench_press.jpg\",\r\n        \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n        \"description\": [\"Bench Press\"],\r\n        \"instructions\": [\r\n            \"Lie back on a flat bench holding a barbell in the rack above you with a shoulder-width, overhand grip.\",\r\n            \"Lift the bar off the rack and position it above your chest with arms fully extended.\",\r\n            \"Lower the bar slowly until it touches your middle chest.\",\r\n            \"Push the bar back to the starting position explosively as you exhale.\"\r\n        ],\r\n        \"workout\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    {\r\n        \"name\": \"Incline Bench Press\",\r\n        \"imageUrl\": \"http://example.com/incline_bench_press.jpg\",\r\n        \"sets\": [\"3x10\", \"3x8\", \"3x6\"],\r\n        \"description\": [\"Incline Bench Press\"],\r\n        \"instructions\": [\r\n            \"Set an adjustable bench to an incline of 30-45 degrees.\",\r\n            \"Lie back on the bench holding a barbell above your chest with arms fully extended.\",\r\n            \"Lower the bar slowly until it touches the upper part of your chest.\",\r\n            \"Push the bar back to the starting position as you exhale.\"\r\n        ],\r\n        \"workout\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    {\r\n        \"name\": \"Dumbbell Flyes\",\r\n        \"imageUrl\": \"http://example.com/dumbbell_flyes.jpg\",\r\n        \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n        \"description\": [\"Dumbbell Flyes\"],\r\n        \"instructions\": [\r\n            \"Lie on a flat bench with a dumbbell in each hand, palms facing each other.\",\r\n            \"Extend your arms above your chest with a slight bend in your elbows.\",\r\n            \"Lower the dumbbells out to the sides of your chest in an arc motion.\",\r\n            \"Raise the dumbbells back to the starting position, squeezing your chest at the top.\"\r\n        ],\r\n        \"workout\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    {\r\n        \"name\": \"Push-Ups\",\r\n        \"imageUrl\": \"http://example.com/push_ups.jpg\",\r\n        \"sets\": [\"3x15\", \"3x12\", \"3x10\"],\r\n        \"description\": [\"Push-Ups\"],\r\n        \"instructions\": [\r\n            \"Get into a high plank position with your hands placed shoulder-width apart.\",\r\n            \"Lower your body until your chest nearly touches the floor, keeping your elbows at a 45-degree angle.\",\r\n            \"Push back up to the starting position.\",\r\n            \"Keep your body in a straight line throughout the movement.\"\r\n        ],\r\n        \"workout\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    {\r\n        \"name\": \"Chest Dips\",\r\n        \"imageUrl\": \"http://example.com/chest_dips.jpg\",\r\n        \"sets\": [\"3x12\", \"3x10\", \"3x8\"],\r\n        \"description\": [\"Chest Dips\"],\r\n        \"instructions\": [\r\n            \"Hold onto the parallel bars and lift your body with your arms fully extended.\",\r\n            \"Lean forward slightly and lower your body by bending your elbows until your upper arms are parallel to the floor.\",\r\n            \"Push your body back to the starting position.\",\r\n            \"Keep your core engaged and your movements controlled.\"\r\n        ],\r\n        \"workout\": {\r\n            \"id\": 1\r\n        }\r\n    }\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/exercise/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"exercise",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Exercise",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/exercise/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"exercise",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/users/account/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"users",
+								"account",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"age\": 30,\r\n  \"weight\": 70.0,\r\n  \"height\": 175.0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/users/bmi_calculator/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"users",
+								"bmi_calculator",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Water Tracker",
+			"item": [
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"today\": \"2024-07-05\",\r\n  \"amount\": 640.0,\r\n  \"user\": {\r\n    \"id\": 1\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/water_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"water_tracker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/water_tracker/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"water_tracker",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TrackerList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/water_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"water_tracker"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sleep Tracker",
+			"item": [
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"today\": \"2024-07-05\",\r\n  \"sleepDuration\": 480,  // 480 minutes = 8 hours (8 * 60 = 480)\r\n  \"user\": {\r\n    \"id\": 1\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/sleep_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"sleep_tracker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tracker",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/sleep_tracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"sleep_tracker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TrackerList",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
