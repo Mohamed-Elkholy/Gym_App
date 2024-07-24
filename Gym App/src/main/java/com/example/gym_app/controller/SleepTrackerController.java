@@ -5,9 +5,12 @@ import com.example.gym_app.model.WaterTracker;
 import com.example.gym_app.service.SleepTrackerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/sleep_tracker")
@@ -26,5 +29,9 @@ public class SleepTrackerController {
     public ResponseEntity<Void> deleteSleepTracker(@PathVariable Long id) {
         service.deleteSleepTracker(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping
+    public ResponseEntity<List<SleepTracker>> getSleepTrackerListForWeek() throws ChangeSetPersister.NotFoundException {
+        return ResponseEntity.ok(service.getSleepTrackerListForWeek());
     }
 }
