@@ -21,6 +21,8 @@ public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Lob
+    private byte[] photo;
     @NotNull(message = "Name is mandatory")
     @Column(unique = true)
     private String name;

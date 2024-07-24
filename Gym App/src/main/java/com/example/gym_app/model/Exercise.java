@@ -20,7 +20,8 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String imageUrl;
+    @Lob
+    private byte[] photo;
     @ElementCollection
     @JoinTable(name = "excecise_sets", joinColumns = @JoinColumn(name = "exercise_id"))
     private List<String> sets = new ArrayList<>();

@@ -23,6 +23,7 @@ public class Token {
   @Enumerated(EnumType.STRING)
   public TokenType tokenType = TokenType.BEARER;
 
+  public boolean expired;
   public boolean revoked;
 
   @ManyToOne(fetch = FetchType.LAZY)

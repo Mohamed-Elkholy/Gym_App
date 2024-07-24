@@ -15,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -27,6 +29,9 @@ public class AuthenticationService {
   public AuthenticationResponse register(RegisterRequest request) {
     if (!request.getPassword().equals(request.getConfirmPassword())) {
       throw new IllegalArgumentException("Passwords are not the same :(");
+    }
+    if (repository.findByUsername(request.getUsername()).isPresent()) {
+      throw new IllegalArgumentException("This username is not valid :(");
     }
     var user = User.builder()
         .username(request.getUsername())
@@ -63,6 +68,7 @@ public class AuthenticationService {
         .token(jwtToken)
         .tokenType(TokenType.BEARER)
         .revoked(false)
+        .expired(false)
         .build();
     tokenRepository.save(token);
   }
@@ -72,6 +78,7 @@ public class AuthenticationService {
     if (validUserTokens.isEmpty())
       return;
     validUserTokens.forEach(token -> {
+      token.setExpired(true);
       token.setRevoked(true);
     });
     tokenRepository.saveAll(validUserTokens);
