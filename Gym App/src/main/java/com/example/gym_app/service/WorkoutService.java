@@ -4,7 +4,9 @@ import com.example.gym_app.model.Workout;
 import com.example.gym_app.repository.WorkoutRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +20,14 @@ public class WorkoutService {
         return repository.findAll();
     }
 
-    public Workout addWorkout(Workout workout) {
-        if(repository.existsByName(workout.getName())) {
+    public void addWorkout(MultipartFile photo, String name) throws IOException {
+        if(repository.existsByName(name)) {
             throw new IllegalArgumentException("Workout name must be unique");
         }
-        return repository.save(workout);
+        Workout workout = new Workout();
+        workout.setName(name);
+        workout.setPhoto(photo.getBytes());
+        repository.save(workout);
     }
 
     public void deleteWorkout(Long id) {

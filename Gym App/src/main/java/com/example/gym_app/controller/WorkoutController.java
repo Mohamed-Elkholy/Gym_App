@@ -1,5 +1,6 @@
 package com.example.gym_app.controller;
 
+import com.example.gym_app.dto.WorkoutDto;
 import com.example.gym_app.model.Exercise;
 import com.example.gym_app.model.Workout;
 import com.example.gym_app.service.WorkoutService;
@@ -9,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +29,16 @@ public class WorkoutController {
         return ResponseEntity.ok(service.getWorkoutList());
     }
 
-    @PostMapping
-    public ResponseEntity<Workout> addWorkout(@Valid @RequestBody Workout workout) {
+    @PostMapping(consumes = "multipart/form-data")
+    public ResponseEntity<String> addWorkout(
+            @RequestParam("photo") MultipartFile photo,
+            @RequestParam("name") String name
+            ) throws IOException {
         try {
-            return ResponseEntity.ok(service.addWorkout(workout));
+            service.addWorkout(photo, name);
+            return ResponseEntity.ok("The Workout has been added successfully :)");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
