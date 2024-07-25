@@ -41,12 +41,15 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<SleepTracker> sleepTrackers = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private List<Token> tokens;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.EMPTY_LIST;
+        return role.getAuthorities();
     }
 
     @Override
