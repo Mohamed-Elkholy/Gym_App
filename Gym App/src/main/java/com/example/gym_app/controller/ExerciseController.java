@@ -5,7 +5,9 @@ import com.example.gym_app.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,14 +24,22 @@ public class ExerciseController {
     }
 
     @PostMapping
-    public ResponseEntity<Exercise> addExercise(@RequestBody Exercise exercise) {
-        return ResponseEntity.ok(service.addExercise(exercise));
+    public ResponseEntity<Exercise> addExercise(
+            @RequestParam("photo") MultipartFile photo,
+            @RequestParam("name") String name,
+            @RequestParam("sets") List<String> sets,
+            @RequestParam("description") List<String> description,
+            @RequestParam("instructions") List<String> instructions,
+            @RequestParam("workoutId") Long workoutId) throws IOException {
+        Exercise exercise = service.addExercise(photo, name, sets, description, instructions, workoutId);
+        return ResponseEntity.ok(exercise);
     }
 
     @PostMapping("/list")
     public ResponseEntity<List<Exercise>> addExercises(@RequestBody List<Exercise> exercises) {
         return ResponseEntity.ok(service.addExercises(exercises));
     }
+
     @GetMapping("/get/{name}")
     public ResponseEntity<Exercise> getExerciseByName(@PathVariable(value = "name") String name) {
         Optional<Exercise> exercise = service.getExerciseByName(name);
@@ -46,7 +56,5 @@ public class ExerciseController {
     public ResponseEntity<Exercise> getExercise(@PathVariable Long id) {
         Optional<Exercise> exercise = service.getExercise(id);
         return exercise.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-
     }
-
 }
