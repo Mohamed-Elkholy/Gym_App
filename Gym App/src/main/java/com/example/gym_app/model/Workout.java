@@ -26,7 +26,7 @@ public class Workout {
     @NotNull(message = "Name is mandatory")
     @Column(unique = true)
     private String name;
-    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Exercise> exercises = new ArrayList<>();
 }

@@ -4,6 +4,7 @@ import com.example.gym_app.model.Exercise;
 import com.example.gym_app.model.Workout;
 import com.example.gym_app.repository.ExerciseRepository;
 import com.example.gym_app.repository.WorkoutRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,8 +55,12 @@ public class ExerciseService {
         repository.deleteById(id);
     }
 
-    public Optional<Exercise> getExercise(Long id) {
-        return repository.findById(id);
+    public Exercise getExercise(Long id) {
+        Optional<Exercise> optionalExercise = repository.findById(id);
+        if (optionalExercise == null) {
+            throw new IllegalArgumentException("No Exercise with this id " + id);
+        }
+        return optionalExercise.get();
     }
     public List<Exercise> addExercises(List<Exercise> exercises) {
         return repository.saveAll(exercises);
@@ -63,5 +68,17 @@ public class ExerciseService {
 
     public Optional<Exercise> getExerciseByName(String name) {
         return repository.findByName(name);
+    }
+
+    @Transactional
+    public List<Exercise> getExercisesByWorkout(String workoutName) {
+        if (!workoutRepository.existsByName(workoutName)) {
+            throw new IllegalArgumentException("There is now workouts with this name" + workoutName);
+        }
+        return workoutRepository.findExercisesByName(workoutName);
+    }
+
+    public List<Exercise> searchExercisesByName(String name) {
+        return repository.findByNameContaining(name);
     }
 }

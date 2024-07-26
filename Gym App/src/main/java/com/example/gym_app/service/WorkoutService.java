@@ -45,4 +45,8 @@ public class WorkoutService {
     public Optional<Workout> getWorkoutByName(String name) {
         return repository.findByName(name);
     }
+
+    public List<Workout> searchWorkoutsByName(String name) {
+        return repository.findByNameContaining(name);
+    }
 }

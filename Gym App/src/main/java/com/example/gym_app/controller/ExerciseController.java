@@ -15,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/exercise")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ExerciseController {
 
     private final ExerciseService service;
@@ -45,11 +46,6 @@ public class ExerciseController {
     public ResponseEntity<List<Exercise>> addExercises(@RequestBody List<Exercise> exercises) {
         return ResponseEntity.ok(service.addExercises(exercises));
     }
-    @GetMapping("/get/{name}")
-    public ResponseEntity<Exercise> getExerciseByName(@PathVariable(value = "name") String name) {
-        Optional<Exercise> exercise = service.getExerciseByName(name);
-        return exercise.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
@@ -57,11 +53,15 @@ public class ExerciseController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Exercise> getExercise(@PathVariable Long id) {
-        Optional<Exercise> exercise = service.getExercise(id);
-        return exercise.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/search")
+    public ResponseEntity<List<Exercise>> searchByName(@RequestParam("name") String name) {
+        List<Exercise> exercises = service.searchExercisesByName(name);
+        return ResponseEntity.ok(exercises);
+    }
 
+    @GetMapping("/{workout_name}")
+    public ResponseEntity<List<Exercise>> getExercisesByWorkout(@PathVariable("workout_name") String workoutName) {
+        return ResponseEntity.ok(service.getExercisesByWorkout(workoutName));
     }
 
 }

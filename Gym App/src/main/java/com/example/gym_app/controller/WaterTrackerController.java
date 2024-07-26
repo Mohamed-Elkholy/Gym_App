@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/water_tracker")
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin
 public class WaterTrackerController {
 
     private final WaterTrackerService service;
@@ -26,19 +28,25 @@ public class WaterTrackerController {
     @PostMapping
     public ResponseEntity<WaterTracker> addWaterTracker(@Valid @RequestBody
                                                         WaterTracker waterTracker,
-                                                        @RequestHeader("Authorization")String jwt
+                                                        Authentication connectedUser
     ) throws Exception {
-        User user= userService.findUserProfileByJwt(jwt);
-        return ResponseEntity.ok(service.addWaterTracker(waterTracker, user));
+        return ResponseEntity.ok(service.addWaterTracker(waterTracker, connectedUser));
     }
+    /*
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWaterTracker(@PathVariable Long id) {
-        service.deleteWaterTracker(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteSleepTracker(@PathVariable Long id, Authentication connectedUser) {
+        service.deleteSleepTracker(id, connectedUser);
+        return ResponseEntity.ok("Deleted Successfully :)");
+    }
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteWaterTracker(@PathVariable Long id, Authentication connectedUser) {
+        service.deleteWaterTracker(id, connectedUser);
+        return ResponseEntity.ok("Deleted Successfully :)");
     }
     @GetMapping
-    public ResponseEntity<List<WaterTracker>> getWaterTrackerListForWeek() throws ChangeSetPersister.NotFoundException {
-        return ResponseEntity.ok(service.getWaterTrackerListForWeek());
+    public ResponseEntity<List<WaterTracker>> getWaterTrackerListForWeek(Authentication connectedUser) throws ChangeSetPersister.NotFoundException {
+        return ResponseEntity.ok(service.getWaterTrackerListForWeek(connectedUser));
     }
 
 }
