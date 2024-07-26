@@ -1,7 +1,9 @@
 package com.example.gym_app.controller;
 
 import com.example.gym_app.model.SleepTracker;
+import com.example.gym_app.model.User;
 import com.example.gym_app.model.WaterTracker;
+import com.example.gym_app.service.UserService;
 import com.example.gym_app.service.WaterTrackerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +21,15 @@ import java.util.List;
 public class WaterTrackerController {
 
     private final WaterTrackerService service;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<WaterTracker> addWaterTracker(@Valid @RequestBody
-                                                    WaterTracker waterTracker) {
-        return ResponseEntity.ok(service.addWaterTracker(waterTracker));
+                                                        WaterTracker waterTracker,
+                                                        @RequestHeader("Authorization")String jwt
+    ) throws Exception {
+        User user= userService.findUserProfileByJwt(jwt);
+        return ResponseEntity.ok(service.addWaterTracker(waterTracker, user));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWaterTracker(@PathVariable Long id) {

@@ -25,6 +25,7 @@ public class WorkoutController {
     private final WorkoutService service;
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:8080")  // Replace with your Vue app's URL
     public ResponseEntity<List<Workout>> getWorkoutList() {
         return ResponseEntity.ok(service.getWorkoutList());
     }

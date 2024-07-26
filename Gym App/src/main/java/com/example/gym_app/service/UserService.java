@@ -1,5 +1,6 @@
 package com.example.gym_app.service;
 
+import com.example.gym_app.config.JwtService;
 import com.example.gym_app.dto.AccountDto;
 import com.example.gym_app.dto.BMIRequest;
 import com.example.gym_app.exceptions.GlobalExceptionHandler;
@@ -20,6 +21,7 @@ public class UserService {
     private final UserRepository repository;
     private final WaterTrackerRepository waterTrackerRepository;
     private final SleepTrackerRepository sleepTrackerRepository;
+    private final JwtService jwtService;
     public AccountDto getAccount(Long id) throws ChangeSetPersister.NotFoundException {
         User user = repository.findById(id)
                 .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
@@ -43,5 +45,13 @@ public class UserService {
         repository.save(user);
         double result = bmiRequest.getWeight() / Math.pow(bmiRequest.getHeight() / 100.0, 2);
         return result;
+    }
+
+    public User findUserProfileByJwt(String jwt) throws Exception {
+        String username = jwtService.extractUsername(jwt);
+
+        User user= repository.findByUsername(username).orElseThrow();
+
+        return user;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.gym_app.service;
 
+import com.example.gym_app.model.User;
 import com.example.gym_app.model.WaterTracker;
 import com.example.gym_app.repository.WaterTrackerRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,11 @@ public class WaterTrackerService {
 
     private final WaterTrackerRepository repository;
 
-    public WaterTracker addWaterTracker(WaterTracker waterTracker) {
+    public WaterTracker addWaterTracker(WaterTracker waterTracker, User user) {
         if (repository.existsByToday(waterTracker.getToday())) {
             throw new IllegalArgumentException("You can't enter the same date twice :)");
         }
+        waterTracker.setUser(user);
         return repository.save(waterTracker);
     }
 
