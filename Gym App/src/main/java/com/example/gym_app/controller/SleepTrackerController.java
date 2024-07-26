@@ -1,7 +1,6 @@
 package com.example.gym_app.controller;
 
 import com.example.gym_app.model.SleepTracker;
-import com.example.gym_app.model.WaterTracker;
 import com.example.gym_app.service.SleepTrackerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/sleep_tracker")
@@ -34,7 +35,16 @@ public class SleepTrackerController {
         return ResponseEntity.ok("Deleted Successfully :)");
     }
     @GetMapping
-    public ResponseEntity<List<SleepTracker>> getSleepTrackerListForWeek(Authentication connectedUser) throws ChangeSetPersister.NotFoundException {
-        return ResponseEntity.ok(service.getSleepTrackerListForWeek(connectedUser));
+    public ResponseEntity<List<SleepTracker>> getSleepTrackerListForWeek(LocalDate date, Authentication connectedUser) throws ChangeSetPersister.NotFoundException {
+        return ResponseEntity.ok(service.getSleepTrackerListForWeek(date, connectedUser));
+    }
+
+    @GetMapping("/Date")
+    public ResponseEntity<SleepTracker> getSleepTrackerByDay(@RequestParam("date") LocalDate date, Authentication connectedUser) throws ChangeSetPersister.NotFoundException {
+        Optional<SleepTracker> sleepTracker = service.getSleepTrackerByDay(date, connectedUser);
+        if (sleepTracker == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(sleepTracker.get());
     }
 }

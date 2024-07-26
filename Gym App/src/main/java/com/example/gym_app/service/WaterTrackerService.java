@@ -9,7 +9,9 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +38,16 @@ public class WaterTrackerService {
         List<WaterTracker> result = repository.findAllByUser(user.getId());
         if (result == null) throw new ChangeSetPersister.NotFoundException();
         return (result.size() > 7 ? result.subList(0,7): result);
+    }
+    /*
+    public Optional<SleepTracker> getSleepTrackerByDay(LocalDate date, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+        return repository.findSleepTrackerByDay(date, user.getId());
+    }
+     */
+
+    public Optional<WaterTracker> getWaterTrackerByDay(LocalDate date, Authentication connectedUser) {
+        User user = (User) connectedUser.getPrincipal();
+        return repository.findWaterTrackerByDay(date, user.getId());
     }
 }

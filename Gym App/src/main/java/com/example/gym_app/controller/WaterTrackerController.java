@@ -13,7 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/water_tracker")
@@ -47,6 +49,15 @@ public class WaterTrackerController {
     @GetMapping
     public ResponseEntity<List<WaterTracker>> getWaterTrackerListForWeek(Authentication connectedUser) throws ChangeSetPersister.NotFoundException {
         return ResponseEntity.ok(service.getWaterTrackerListForWeek(connectedUser));
+    }
+
+    @GetMapping("/Date")
+    public ResponseEntity<WaterTracker> getWaterTrackerByDay(@RequestParam("date") LocalDate date, Authentication connectedUser) throws ChangeSetPersister.NotFoundException {
+        Optional<WaterTracker> waterTracker = service.getWaterTrackerByDay(date, connectedUser);
+        if (waterTracker == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(waterTracker.get());
     }
 
 }

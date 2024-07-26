@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface SleepTrackerRepository extends JpaRepository<SleepTracker, Long> {
     @Query("select x from SleepTracker x where x.user.id = :id")
@@ -20,4 +21,7 @@ public interface SleepTrackerRepository extends JpaRepository<SleepTracker, Long
     @Transactional
     @Query("DELETE FROM SleepTracker x WHERE x.id = :trackerId AND x.user.id = :userId")
     void deleteByIdAndUserId(@Param("trackerId") Long trackerId, @Param("userId") Long userId);
+
+    @Query("select x from SleepTracker x where x.today = :date and x.user.id = :id")
+    Optional<SleepTracker> findSleepTrackerByDay(@Param("date") LocalDate date, @Param("id") Long id);
 }
