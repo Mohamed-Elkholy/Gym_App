@@ -21,7 +21,6 @@ public class WaterTracker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Date is mandatory")
-    @Column(unique = true)
     private LocalDate today;
     @NotNull(message = "Date is mandatory")
     @Min(value = 0, message = "Amount should not be less than 0")

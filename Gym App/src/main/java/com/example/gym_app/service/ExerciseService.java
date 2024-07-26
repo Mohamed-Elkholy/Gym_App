@@ -4,8 +4,10 @@ import com.example.gym_app.model.Exercise;
 import com.example.gym_app.model.Workout;
 import com.example.gym_app.repository.ExerciseRepository;
 import com.example.gym_app.repository.WorkoutRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -16,48 +18,67 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ExerciseService {
 
-    private final ExerciseRepository exerciseRepository;
+    private final ExerciseRepository repository;
     private final WorkoutRepository workoutRepository;
 
     public List<Exercise> getExerciseList() {
-        return exerciseRepository.findAll();
+        return repository.findAll();
     }
 
-    public Exercise addExercise(MultipartFile photo, String name, List<String> sets, List<String> description, List<String> instructions, Long workoutId) throws IOException {
-        if (exerciseRepository.existsByName(name)) {
-            throw new IllegalArgumentException("Exercise name must be unique");
+    public void addExercise(
+            MultipartFile photo,
+            String name,
+            List<String> sets,
+            List<String> description,
+            List<String> instructions,
+            Long workoutId
+    ) throws IOException {
+        if (repository.existsByName(name)) {
+            throw new IllegalArgumentException("Exercise name must be unique :(");
         }
-        Optional<Workout> workoutOptional = workoutRepository.findById(workoutId);
-        if (!workoutOptional.isPresent()) {
-            throw new IllegalArgumentException("Invalid workout ID");
+        Exercise exercise = Exercise.builder()
+                .name(name)
+                .photo(photo.getBytes())
+                .sets(sets)
+                .description(description)
+                .instructions(instructions)
+                .build();
+        if (workoutRepository.existsById(workoutId)) {
+            exercise.setWorkout(workoutRepository.getReferenceById(workoutId));
+        } else {
+            throw new IllegalArgumentException("There is no workouts with this id :(");
         }
-
-        Workout workout = workoutOptional.get();
-
-        Exercise exercise = new Exercise();
-        exercise.setName(name);
-        exercise.setPhoto(photo.getBytes());
-        exercise.setSets(sets);
-        exercise.setDescription(description);
-        exercise.setInstructions(instructions);
-        exercise.setWorkout(workout);
-
-        return exerciseRepository.save(exercise);
+        repository.save(exercise);
     }
 
     public void deleteExercise(Long id) {
-        exerciseRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
-    public Optional<Exercise> getExercise(Long id) {
-        return exerciseRepository.findById(id);
+    public Exercise getExercise(Long id) {
+        Optional<Exercise> optionalExercise = repository.findById(id);
+        if (optionalExercise == null) {
+            throw new IllegalArgumentException("No Exercise with this id " + id);
+        }
+        return optionalExercise.get();
     }
-
     public List<Exercise> addExercises(List<Exercise> exercises) {
-        return exerciseRepository.saveAll(exercises);
+        return repository.saveAll(exercises);
     }
 
     public Optional<Exercise> getExerciseByName(String name) {
-        return exerciseRepository.findByName(name);
+        return repository.findByName(name);
+    }
+
+    @Transactional
+    public List<Exercise> getExercisesByWorkout(String workoutName) {
+        if (!workoutRepository.existsByName(workoutName)) {
+            throw new IllegalArgumentException("There is now workouts with this name" + workoutName);
+        }
+        return workoutRepository.findExercisesByName(workoutName);
+    }
+
+    public List<Exercise> searchExercisesByName(String name) {
+        return repository.findByNameContaining(name);
     }
 }

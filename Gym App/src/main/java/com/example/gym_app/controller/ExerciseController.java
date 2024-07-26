@@ -1,6 +1,7 @@
 package com.example.gym_app.controller;
 
 import com.example.gym_app.model.Exercise;
+import com.example.gym_app.model.Workout;
 import com.example.gym_app.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/exercise")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ExerciseController {
 
     private final ExerciseService service;
@@ -23,27 +25,26 @@ public class ExerciseController {
         return ResponseEntity.ok(service.getExerciseList());
     }
 
-    @PostMapping
-    public ResponseEntity<Exercise> addExercise(
-            @RequestParam("photo") MultipartFile photo,
+    @PostMapping(consumes = "multipart/form-data")
+    public ResponseEntity<String> addExercise(
             @RequestParam("name") String name,
+            @RequestParam("photo") MultipartFile photo,
             @RequestParam("sets") List<String> sets,
             @RequestParam("description") List<String> description,
             @RequestParam("instructions") List<String> instructions,
-            @RequestParam("workoutId") Long workoutId) throws IOException {
-        Exercise exercise = service.addExercise(photo, name, sets, description, instructions, workoutId);
-        return ResponseEntity.ok(exercise);
+            @RequestParam("workoutId") Long workoutId
+    ) throws IOException {
+        try {
+            service.addExercise(photo, name, sets, description, instructions, workoutId);
+            return ResponseEntity.ok("Exercise has been added successfully :)");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/list")
     public ResponseEntity<List<Exercise>> addExercises(@RequestBody List<Exercise> exercises) {
         return ResponseEntity.ok(service.addExercises(exercises));
-    }
-
-    @GetMapping("/get/{name}")
-    public ResponseEntity<Exercise> getExerciseByName(@PathVariable(value = "name") String name) {
-        Optional<Exercise> exercise = service.getExerciseByName(name);
-        return exercise.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
@@ -52,9 +53,15 @@ public class ExerciseController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Exercise> getExercise(@PathVariable Long id) {
-        Optional<Exercise> exercise = service.getExercise(id);
-        return exercise.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/search")
+    public ResponseEntity<List<Exercise>> searchByName(@RequestParam("name") String name) {
+        List<Exercise> exercises = service.searchExercisesByName(name);
+        return ResponseEntity.ok(exercises);
     }
+
+    @GetMapping("/{workout_name}")
+    public ResponseEntity<List<Exercise>> getExercisesByWorkout(@PathVariable("workout_name") String workoutName) {
+        return ResponseEntity.ok(service.getExercisesByWorkout(workoutName));
+    }
+
 }

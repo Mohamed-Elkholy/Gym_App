@@ -6,6 +6,7 @@ import com.example.gym_app.model.Workout;
 import com.example.gym_app.service.WorkoutService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +21,8 @@ import java.util.Optional;
 @RequestMapping("/workout")
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin
+@Slf4j
 public class WorkoutController {
 
     private final WorkoutService service;
@@ -41,6 +44,15 @@ public class WorkoutController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<Workout>> searchByName(@RequestParam("name") String name) {
+        log.info("Name = "+ name);
+        List<Workout> workouts = service.searchWorkoutsByName(name);
+        for (Workout record : workouts) {
+            System.out.println("name = "+ record.getName());
+        }
+        return ResponseEntity.ok(workouts);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
@@ -51,11 +63,6 @@ public class WorkoutController {
     @GetMapping("/{id}")
     public ResponseEntity<Workout> getWorkout(@PathVariable Long id) {
         Optional<Workout> workout = service.getWorkout(id);
-        return workout.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-    @GetMapping("/get/{name}")
-    public ResponseEntity<Workout> getWorkoutByName(@PathVariable(value = "name") String name) {
-        Optional<Workout> workout = service.getWorkoutByName(name);
         return workout.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
