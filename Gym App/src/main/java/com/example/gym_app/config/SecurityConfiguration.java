@@ -13,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-
 import static com.example.gym_app.model.Permission.*;
 import static com.example.gym_app.model.Role.ADMIN;
 import static org.springframework.http.HttpMethod.*;
@@ -26,7 +25,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private static final String[] WHITE_LIST_URL = {"/auth/**",
+    private static final String[] WHITE_LIST_URL = {
+            "/auth/**",
             "/workout",
             "/exercise",
             "/v2/api-docs",
@@ -38,7 +38,9 @@ public class SecurityConfiguration {
             "/configuration/security",
             "/swagger-ui/**",
             "/webjars/**",
-            "/swagger-ui.html"};
+            "/swagger-ui.html"
+    };
+
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
@@ -49,15 +51,16 @@ public class SecurityConfiguration {
                 .cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers(WHITE_LIST_URL)
-                                .permitAll()
+                        req
+                                .requestMatchers(WHITE_LIST_URL).permitAll()
+                                .requestMatchers(GET, "/workout/*").permitAll() // Allow only GET requests to /workout/{id}
+                                .requestMatchers(GET, "/exercise/*").permitAll() // Allow only GET requests to /workout/{id}
                                 .requestMatchers("/admin/**").hasAnyRole(ADMIN.name())
                                 .requestMatchers(GET, "/admin/**").hasAnyAuthority(ADMIN_READ.name())
                                 .requestMatchers(POST, "/admin/**").hasAnyAuthority(ADMIN_CREATE.name())
                                 .requestMatchers(PUT, "/admin/**").hasAnyAuthority(ADMIN_UPDATE.name())
                                 .requestMatchers(DELETE, "/admin/**").hasAnyAuthority(ADMIN_DELETE.name())
-                                .anyRequest()
-                                .authenticated()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
@@ -66,10 +69,8 @@ public class SecurityConfiguration {
                         logout.logoutUrl("/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                )
-        ;
+                );
 
         return http.build();
     }
-
 }

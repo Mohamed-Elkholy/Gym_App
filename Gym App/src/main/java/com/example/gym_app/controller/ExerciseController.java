@@ -53,15 +53,16 @@ public class ExerciseController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Exercise> getExercise(@PathVariable Long id) {
+        Optional<Exercise>exercise = Optional.ofNullable(service.getExercise(id));
+        return exercise.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+
+    }
     @GetMapping("/search")
     public ResponseEntity<List<Exercise>> searchByName(@RequestParam("name") String name) {
         List<Exercise> exercises = service.searchExercisesByName(name);
         return ResponseEntity.ok(exercises);
-    }
-
-    @GetMapping("/{workout_name}")
-    public ResponseEntity<List<Exercise>> getExercisesByWorkout(@PathVariable("workout_name") String workoutName) {
-        return ResponseEntity.ok(service.getExercisesByWorkout(workoutName));
     }
 
 }
