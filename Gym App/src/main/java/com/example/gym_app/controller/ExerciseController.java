@@ -58,6 +58,10 @@ public class ExerciseController {
         List<Exercise> exercises = service.searchExercisesByName(name);
         return ResponseEntity.ok(exercises);
     }
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Exercise> getExerciseById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getExercise(id));
+    }
 
     @GetMapping("/{workout_name}")
     public ResponseEntity<List<Exercise>> getExercisesByWorkout(@PathVariable("workout_name") String workoutName) {
