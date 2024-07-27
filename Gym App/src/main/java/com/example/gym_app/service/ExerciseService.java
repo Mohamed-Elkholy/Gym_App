@@ -1,13 +1,11 @@
 package com.example.gym_app.service;
 
 import com.example.gym_app.model.Exercise;
-import com.example.gym_app.model.Workout;
 import com.example.gym_app.repository.ExerciseRepository;
 import com.example.gym_app.repository.WorkoutRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -78,7 +76,8 @@ public class ExerciseService {
         return workoutRepository.findExercisesByName(workoutName);
     }
 
-    public List<Exercise> searchExercisesByName(String name) {
-        return repository.findByNameContaining(name);
+    @Transactional
+    public List<Exercise> searchExercisesByName(String name, Long workoutId) {
+        return repository.findByNameContaining(name, workoutId);
     }
 }

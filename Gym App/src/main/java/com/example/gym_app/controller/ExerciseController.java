@@ -54,8 +54,8 @@ public class ExerciseController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Exercise>> searchByName(@RequestParam("name") String name) {
-        List<Exercise> exercises = service.searchExercisesByName(name);
+    public ResponseEntity<List<Exercise>> searchByName(@RequestParam("name") String name, @RequestParam("workoutId") Long workoutId) {
+        List<Exercise> exercises = service.searchExercisesByName(name, workoutId);
         return ResponseEntity.ok(exercises);
     }
     @GetMapping("/get/{id}")

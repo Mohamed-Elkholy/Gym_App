@@ -2,6 +2,7 @@ package com.example.gym_app.service;
 
 import com.example.gym_app.model.Workout;
 import com.example.gym_app.repository.WorkoutRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,6 +47,7 @@ public class WorkoutService {
         return repository.findByName(name);
     }
 
+    @Transactional
     public List<Workout> searchWorkoutsByName(String name) {
         return repository.findByNameContaining(name);
     }

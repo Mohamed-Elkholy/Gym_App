@@ -13,6 +13,6 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
     boolean existsByName(String name);
 
-    @Query("SELECT e FROM Exercise e WHERE e.name LIKE %:name%")
-    List<Exercise> findByNameContaining(@Param("name") String name);
+    @Query("SELECT e FROM Exercise e WHERE e.name LIKE %:name% and e.workout.id = :workoutId")
+    List<Exercise> findByNameContaining(@Param("name") String name, @Param("workoutId") Long workoutId);
 }

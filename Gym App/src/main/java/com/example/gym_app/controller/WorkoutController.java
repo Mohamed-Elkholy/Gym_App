@@ -46,11 +46,7 @@ public class WorkoutController {
     }
     @GetMapping("/search")
     public ResponseEntity<List<Workout>> searchByName(@RequestParam("name") String name) {
-        log.info("Name = "+ name);
         List<Workout> workouts = service.searchWorkoutsByName(name);
-        for (Workout record : workouts) {
-            System.out.println("name = "+ record.getName());
-        }
         return ResponseEntity.ok(workouts);
     }
 
