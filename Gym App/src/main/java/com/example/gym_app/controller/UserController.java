@@ -30,6 +30,6 @@ public class UserController {
     @PostMapping("/bmi_calculator")
     public ResponseEntity<String> calculateBMI(@RequestBody BMIRequest bmiRequest,
                                                Authentication connectedUser) throws ChangeSetPersister.NotFoundException {
-        return ResponseEntity.ok("Your BMI test result = " + service.calculateBMI(bmiRequest, connectedUser));
+        return ResponseEntity.ok("" + service.calculateBMI(bmiRequest, connectedUser));
     }
 }
