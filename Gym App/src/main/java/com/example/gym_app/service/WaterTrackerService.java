@@ -4,6 +4,7 @@ import com.example.gym_app.model.SleepTracker;
 import com.example.gym_app.model.User;
 import com.example.gym_app.model.WaterTracker;
 import com.example.gym_app.repository.WaterTrackerRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class WaterTrackerService {
 
     private final WaterTrackerRepository repository;
@@ -37,7 +39,9 @@ public class WaterTrackerService {
         User user = (User) connectedUser.getPrincipal();
         List<WaterTracker> result = repository.findAllByUser(user.getId());
         if (result == null) throw new ChangeSetPersister.NotFoundException();
-        return (result.size() > 7 ? result.subList(0,7): result);
+        result = (result.size() > 7 ? result.subList(0,7): result);
+        result.sort((x,y) -> x.getToday().compareTo(y.getToday()));
+        return result;
     }
     /*
     public Optional<SleepTracker> getSleepTrackerByDay(LocalDate date, Authentication connectedUser) {

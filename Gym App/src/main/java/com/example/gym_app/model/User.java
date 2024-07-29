@@ -2,9 +2,11 @@ package com.example.gym_app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -26,6 +28,8 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     @NotBlank(message = "Username is mandatory")
     private String username;
+    @Lob
+    private byte[] image;
     @Column(nullable = false)
     @NotBlank(message = "Password is mandatory")
     @Size(min = 6, message = "Password must be at least 6 characters long")

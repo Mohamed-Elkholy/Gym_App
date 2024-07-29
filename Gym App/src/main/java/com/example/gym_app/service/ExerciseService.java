@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ExerciseService {
 
     private final ExerciseRepository repository;
@@ -67,8 +68,7 @@ public class ExerciseService {
     public Optional<Exercise> getExerciseByName(String name) {
         return repository.findByName(name);
     }
-
-    @Transactional
+// here is a transactional annotation
     public List<Exercise> getExercisesByWorkout(String workoutName) {
         if (!workoutRepository.existsByName(workoutName)) {
             throw new IllegalArgumentException("There is now workouts with this name" + workoutName);

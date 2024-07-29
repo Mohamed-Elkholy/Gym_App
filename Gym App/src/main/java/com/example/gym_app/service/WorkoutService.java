@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class WorkoutService {
 
     private final WorkoutRepository repository;
@@ -47,7 +48,7 @@ public class WorkoutService {
         return repository.findByName(name);
     }
 
-    @Transactional
+    // here is a transactional annotation
     public List<Workout> searchWorkoutsByName(String name) {
         return repository.findByNameContaining(name);
     }

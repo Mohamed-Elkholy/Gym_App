@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public interface WaterTrackerRepository extends JpaRepository<WaterTracker, Long> {
 
     @Query("select x from WaterTracker x where x.user.id = :id")

@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 
 @RestController
@@ -25,6 +28,12 @@ public class UserController {
     public ResponseEntity<AccountDto> getAccount(Authentication connectedUser) throws Exception {
         AccountDto accountDto = service.getAccount(connectedUser);
         return ResponseEntity.ok(accountDto);
+    }
+
+    @PostMapping(value = "/image", consumes = "multipart/form-data")
+    public ResponseEntity<String> addUserImage(Authentication connectedUser, @RequestParam("photo") MultipartFile photo) throws IOException {
+        service.addUserImage(connectedUser, photo);
+        return ResponseEntity.ok("UserImage has been added successfully :)");
     }
 
     @PostMapping("/bmi_calculator")
